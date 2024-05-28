@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Head to Head Detail
+{% endblock %}
+
+{% block main %}
+    <table class="table table-hover table-bordered table-dark mx-auto w-75">
+        <tr>
+            {% for id in players %}
+                <td>{{ players[id][0] }} WINS: {{ players[id][1] }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+    <table  class="table table-hover table-bordered table-light mx-auto w-75">
+
+        <thead class="table table-bordered table-dark">
+            <tr>
+                <th>Year</th>
+                <th>Tournament</th>
+                <th>Surface</th>
+                <th>Round</th>
+                <th>Winner</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for match in matches %}
+                <tr>
+                    <td>{{ match["a_year"] }}</td>
+                    <td>{{ match["tournament_name"] }}</td>
+                    <td>{{ match["surface_name"] }}</td>
+                    <td>{{ match["round_name"] }}</td>
+                    <td>{{ players[match["winner_id"]][0] }}</td>
+                    <td>{{ match["score"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+
+    </table>
+{% endblock %}

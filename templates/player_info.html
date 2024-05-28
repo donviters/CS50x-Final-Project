@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Player Info
+{% endblock %}
+
+{% block main %}
+    <table  class="table table-hover table-light mx-auto w-75">
+        <tr>
+            <th class="table-dark">Player Name</th>
+            <td>{{ player["first_name"] }} {{ player["last_name"] }}</td>
+        </tr>
+        <tr>
+            <th class="table-dark">Age</th>
+            <td>{{ age }} ({{ player["birthdate"] }})</td>
+        </tr>
+        <tr>
+            <th class="table-dark">Country</th>
+            <td>{{ player["country_name"] }}</td>
+        </tr>
+        <tr>
+            <th class="table-dark">Rank</th>
+            <td>{{ rank }}</td>
+        </tr>
+    </table>
+{% endblock %}

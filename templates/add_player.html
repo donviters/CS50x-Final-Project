@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Player
+{% endblock %}
+
+{% block main %}
+    <!-- https://www.w3schools.com/howto/howto_js_validation_empty_input.asp -->
+    <script>
+        function validateForm() {
+            var first_name = document.forms["add_player_form"]["first_name"].value;
+            var last_name = document.forms["add_player_form"]["last_name"].value;
+            var birthdate = document.forms["add_player_form"]["birthdate"].value;
+            var country = document.forms["add_player_form"]["country"].value;
+
+            if (first_name == "" || first_name == null) {
+                alert("Enter a player's first name");
+                return false;
+            }
+            if (last_name == "" || last_name == null) {
+                alert("Enter a player's last name");
+                return false;
+            }
+            if (birthdate == "" || birthdate == null) {
+                alert("Enter a player's birthdate");
+                return false;
+            }
+            if (country == "" || country == null) {
+                alert("Enter a player's country");
+                return false;
+            }
+        }
+    </script>
+
+    <form action="add_player" method="post" name="add_player_form" onsubmit="return validateForm()" required>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="first_name" name="first_name" placeholder="First Name" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" class="form-control mx-auto w-auto" id="last_name" name="last_name" placeholder="Last Name" type="text">
+        </div>
+        <div class="mb-3">
+            <label style="color:White;">Birthdate:</label>
+            <input autocomplete="off"  class="form-control mx-auto w-auto" id="birthdate" name="birthdate" placeholder="Birthdate" type="date">
+        </div>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="country" name="country" >
+                <option disabled selected value="">Country</option>
+                {% for country in countries %}
+                    <option value="{{ country }}">{{ country }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Add Player</button>
+    </form>
+{% endblock %}
+

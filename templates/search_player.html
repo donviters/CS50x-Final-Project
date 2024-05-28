@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Player
+{% endblock %}
+
+{% block main %}
+    <!-- https://www.w3schools.com/howto/howto_js_validation_empty_input.asp -->
+    <script>
+        function validateForm() {
+            var first_name = document.forms["search_player_form"]["first_name"].value;
+            var last_name = document.forms["search_player_form"]["last_name"].value;
+
+            if (first_name == "" || first_name == null ) {
+                alert("Enter a player's first name");
+                return false;
+            }
+            if (last_name == "" || last_name == null ) {
+                alert("Enter a player's last name");
+                return false;
+            }
+        }
+    </script>
+
+    <form action="search_player" method="post" name="search_player_form" onsubmit="return validateForm()" required>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="first_name" name="first_name" placeholder="First Name" type="text">
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="last_name" name="last_name" placeholder="Last Name" type="text">
+        </div>
+        <div class="mb-2" style="color:White;">
+            Example: Roger Federer
+        </div>
+
+        <button class="btn btn-primary" type="submit">Search Player</button>
+    </form>
+{% endblock %}
+

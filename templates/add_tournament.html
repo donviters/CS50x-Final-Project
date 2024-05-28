@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Tournament
+{% endblock %}
+
+{% block main %}
+<script>
+    function validateForm() {
+        var tournament_name = document.forms["add_tournament_form"]["tournament_name"].value;
+        var year = document.forms["add_tournament_form"]["year"].value;
+        var surface = document.forms["add_tournament_form"]["surface"].value;
+
+        if (tournament_name == "" || tournament_name == null) {
+            alert("Enter a tournament name");
+            return false;
+        }
+        if (year == "" || year == null) {
+            alert("Enter a year for the tournament");
+            return false;
+        }
+        if (surface == "" || surface == null) {
+            alert("Enter a court surface for the event");
+            return false;
+        }
+    }
+</script>
+
+    <form action="add_tournament" method="post" name="add_tournament_form" onsubmit="return validateForm()" required>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="tournament_name" name="tournament_name" placeholder="Tournament Name" type="text">
+        </div>
+        <!-- https://www.tutorialspoint.com/How-to-use-year-input-type-in-HTML -->
+        <div class="mb-3">
+            <input type="number" class="form-control mx-auto w-auto" id="year" name="year" placeholder="Year" min="1990" max="2030">
+                <script>
+                    document.querySelector("input[type=number]")
+                    .oninput = e => console.log(new Date(e.target.valueAsNumber, 0, 1))
+                </script>
+        </div>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="surface" name="surface" >
+                <option disabled selected value="">Court Surface</option>
+                {% for surface in surfaces %}
+                    <option value="{{ surface }}">{{ surface }}
+
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Add Tournament</button>
+    </form>
+{% endblock %}

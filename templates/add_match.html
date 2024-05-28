@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Match
+{% endblock %}
+
+{% block main %}
+    <script>
+        function validateForm() {
+            var event_id = document.forms["add_match_form"]["event_id"].value;
+            var winner_id = document.forms["add_match_form"]["winner_id"].value;
+            var loser_id = document.forms["add_match_form"]["loser_id"].value;
+            var round_id = document.forms["add_match_form"]["round_id"].value;
+            var score = document.forms["add_match_form"]["score"].value;
+            var date = document.forms["add_match_form"]["date"].value;
+
+            if (event_id == "" || event_id == null) {
+                alert("Select an event where the match took place");
+                return false;
+            }
+            if (winner_id == "" || winner_id == null) {
+                alert("Select the player who won the match");
+                return false;
+            }
+            if (loser_id == "" || loser_id == null) {
+                alert("Select the player who lost the match");
+                return false;
+            }
+            if (round_id == "" || round_id == null) {
+                alert("Select at what round of the tournament the match was played");
+                return false;
+            }
+            if (score == "" || score == null) {
+                alert("Enter the final score of the match");
+                return false;
+            }
+            if (date == "" || date == null) {
+                alert("Select the date when the match was played");
+                return false;
+            }
+
+            if (winner_id == loser_id) {
+                alert("Choose 2 different players");
+                return false;
+            }
+        }
+    </script>
+
+    <form action="add_match" method="post" name="add_match_form" onsubmit="return validateForm()" required>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="event_id" name="event_id" >
+                <option disabled selected value="">Tournament</option>
+                {% for row in events
+                     %}
+                    <option value="{{ row['id'] }}">{{ row["tournament_name"] }} {{ row["a_year"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="winner_id" name="winner_id" >
+                <option disabled selected value="">Winner</option>
+                {% for row in players %}
+                    <option value="{{ row['id'] }}">{{ row["first_name"] }} {{ row["last_name"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="loser_id" name="loser_id" >
+                <option disabled selected value="">Loser</option>
+                {% for row in players %}
+                    <option value="{{ row['id'] }}">{{ row["first_name"] }} {{ row["last_name"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <select class="form-select mx-auto w-auto" id="round" name="round" >
+                <option disabled selected value="">Round</option>
+                {% for round in rounds %}
+                    <option value="{{ round }}">{{ round }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="score" name="score" placeholder="Score" type="text">
+        </div>
+        <div class="mb-3">
+            <label style="color:White;">Date:</label>
+            <input autocomplete="off"  class="form-control mx-auto w-auto" id="date" name="date" placeholder="Date" type="date">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Add Match</button>
+    </form>
+{% endblock %}

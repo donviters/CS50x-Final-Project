@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Ranking
+{% endblock %}
+
+{% block main %}
+    <table  class="table table-hover table-light mx-auto w-75">
+
+        <thead class="table table-bordered table-dark">
+            <tr>
+                <th>Rank</th>
+                <th>Player</th>
+                <th>Points</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in ranking %}
+                <tr>
+                    <td>{{ row["rank"] }}</td>
+                    <td>{{ row["first_name"] }} {{ row["last_name"] }}</td>
+                    <td>{{ row["total_points"] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+{% endblock %}
+
+

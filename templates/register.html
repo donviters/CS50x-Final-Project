@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <script>
+        function validateForm() {
+            var username = document.forms["register_form"]["username"].value;
+            var password = document.forms["register_form"]["password"].value;
+            var confirmation = document.forms["register_form"]["confirmation"].value;
+
+            if (username == "" || username == null) {
+                alert("Enter a username");
+                return false;
+            }
+
+            if (password == "" || password == null) {
+                alert("Enter a password");
+                return false;
+            }
+
+            if (confirmation == "" || confirmation == null) {
+                alert("Confirm password");
+                return false;
+            }
+        }
+    </script>
+    <form action="/register" method="post" name="register_form" onsubmit="return validateForm()" required>
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm Password" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+{% endblock %}
